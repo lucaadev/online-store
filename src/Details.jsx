@@ -55,7 +55,7 @@ class Details extends React.Component {
         {typeof produto.shipping === 'object' && <h2>{frete.toString()}</h2>}
         <button
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addCartItem(produto.id) }
+          onClick={ () => addCartItem(produto) }
           type="button"
         >
           Adicionar ao Carrinho
