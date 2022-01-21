@@ -9,7 +9,7 @@ class Cart extends React.Component {
     this.state = {
       array: [],
       total: 0,
-      quantidade: 1,
+      quantidade: {},
     };
   }
 
@@ -18,6 +18,7 @@ class Cart extends React.Component {
     const { items } = this.props;
     items.map((item) => {
       total += item.price;
+      this.adiciona(item.id);
       return '';
     });
     this.setStateTotal(total);
@@ -40,11 +41,12 @@ class Cart extends React.Component {
           id={ item.id }
           data-testid="shopping-cart-product-quantity"
         >
-          {Number(quantidade)}
+          {quantidade[item.id]}
         </h2>
+
         <button
           type="button"
-          onClick={ () => this.adiciona('', item.id, item.available_quantity) }
+          onClick={ () => this.adiciona(item.id, item.available_quantity) }
           data-testid="product-increase-quantity"
           className="product-increase-quantity"
         >
@@ -52,7 +54,7 @@ class Cart extends React.Component {
         </button>
         <button
           type="button"
-          onClick={ () => this.remover('', item.id) }
+          onClick={ () => this.remover(item.id) }
           data-testid="product-decrease-quantity"
         >
           Retira
@@ -61,22 +63,27 @@ class Cart extends React.Component {
     );
   };
 
-  adiciona = (quantidade2, id, quantidadeDisponivel) => {
-    const valor = document.getElementById(id).innerText;
+  adiciona = (id, quantidadeMaxima) => {
     const { quantidade } = this.state;
-    console.log(valor);
-    console.log(quantidadeDisponivel);
-    if (Number(quantidade) !== Number(quantidadeDisponivel)) {
-      this.setState((prevState) => ({ quantidade: prevState.quantidade + 1 }));
+    if (quantidade[id] === undefined) {
+      quantidade[id] = 1;
+    } else if (quantidade[id] !== Number(quantidadeMaxima)) {
+      quantidade[id] += 1;
     }
+    this.setState({
+      quantidade,
+    });
   };
 
-  remover = (quantidade, id) => {
-    const valor = document.getElementById(id).innerText;
-    console.log(valor);
-    if (document.getElementById(id).innerText > 0) {
-      this.setState((prevState) => ({ quantidade: prevState.quantidade - 1 }));
+  remover = (id) => {
+    const { quantidade } = this.state;
+    quantidade[id] -= 1;
+    if (quantidade[id] <= 0) {
+      quantidade[id] = 1;
     }
+    this.setState({
+      quantidade,
+    });
   };
 
   quantity = (id) => {
