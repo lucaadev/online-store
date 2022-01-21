@@ -44,7 +44,6 @@ class ProductsList extends React.Component {
   render() {
     const { products, categories, input } = this.state;
     const { addCartItem, items } = this.props;
-    console.log(items);
     return (
       <>
         <input
@@ -102,7 +101,7 @@ class ProductsList extends React.Component {
               Mais detalhes
             </Link>
             <button
-              onClick={ () => addCartItem(produto.id) }
+              onClick={ () => addCartItem(produto) }
               data-testid="product-add-to-cart"
               type="button"
             >

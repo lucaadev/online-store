@@ -9,7 +9,7 @@ class Cart extends React.Component {
     this.state = {
       array: [],
       total: 0,
-      disabled: false,
+      quantidade: 1,
     };
   }
 
@@ -28,72 +28,54 @@ class Cart extends React.Component {
   }
 
   verifica = (item) => {
-    const { array, disabled } = this.state;
-    let quantidade = this.quantity(item.id);
-    if (array.length > 0) {
-      if (array.some((it) => it === item.id)) {
-        return '';
-      }
-      if (array.some((it) => it === item.id) === false) {
-        return (
-          <section>
-            <h2 data-testid="shopping-cart-product-name">{item.title}</h2>
-            <h2 data-testid="shopping-cart-product-quantity">{quantidade}</h2>
-            <button
-              type="button"
-              onClick={ () => {
-                quantidade += 1;
-                return '';
-              } }
-              data-testid="product-increase-quantity"
-            >
-              Adiciona
-            </button>
-            <button type="button" data-testid="product-decrease-quantity">Retira</button>
-          </section>
-        );
-      }
-    } else {
-      return (
-        <section data-testid="teste" key={ Math.random() }>
-          <h2 data-testid="shopping-cart-product-name">{item.title}</h2>
-          <h2 id={ item.id } data-testid="shopping-cart-product-quantity">
-            {quantidade}
-          </h2>
-          <button
-            type="button"
-            onClick={ () => this.adiciona(quantidade, item.id, item.available_quantity) }
-            data-testid="product-increase-quantity"
-            disabled={ disabled }
-          >
-            Adiciona
-          </button>
-          <button
-            type="button"
-            onClick={ () => this.remover(quantidade, item.id) }
-            data-testid="product-decrease-quantity"
-          >
-            Retira
-          </button>
-        </section>
-      );
-    }
+    const { array, quantidade } = this.state;
+    const quant = this.quantity(item.id);
+    console.log(quant);
+    this.quantidade = quant;
+    console.log(array);
+    return (
+      <section data-testid="teste" key={ Math.random() }>
+        <h2 data-testid="shopping-cart-product-name">{item.title}</h2>
+        <h2
+          id={ item.id }
+          data-testid="shopping-cart-product-quantity"
+        >
+          {Number(quantidade)}
+        </h2>
+        <button
+          type="button"
+          onClick={ () => this.adiciona('', item.id, item.available_quantity) }
+          data-testid="product-increase-quantity"
+          className="product-increase-quantity"
+        >
+          Adiciona
+        </button>
+        <button
+          type="button"
+          onClick={ () => this.remover('', item.id) }
+          data-testid="product-decrease-quantity"
+        >
+          Retira
+        </button>
+      </section>
+    );
   };
 
-  adiciona = (quantidade, id, quantidadeDisponivel) => {
+  adiciona = (quantidade2, id, quantidadeDisponivel) => {
     const valor = document.getElementById(id).innerText;
+    const { quantidade } = this.state;
     console.log(valor);
-    if (Number(document.getElementById(id).innerText) !== Number(quantidadeDisponivel)) {
-      document.getElementById(id).innerText -= -quantidade;
+    console.log(quantidadeDisponivel);
+    if (Number(quantidade) !== Number(quantidadeDisponivel)) {
+      this.setState((prevState) => ({ quantidade: prevState.quantidade + 1 }));
     }
-    this.setState({ disabled: true });
   };
 
   remover = (quantidade, id) => {
     const valor = document.getElementById(id).innerText;
     console.log(valor);
     if (document.getElementById(id).innerText > 0) {
-      document.getElementById(id).innerText -= quantidade;
+      this.setState((prevState) => ({ quantidade: prevState.quantidade - 1 }));
     }
   };
 
@@ -112,6 +94,16 @@ class Cart extends React.Component {
   render() {
     const { items } = this.props;
     const { total } = this.state;
+    const ids = [];
+    const itemsFiltrados = items.filter((item) => {
+      if (ids.find((id) => id === item.id)) {
+        ids.push(item.id);
+        return false;
+      }
+      ids.push(item.id);
+      return true;
+    });
+
     return (
       <section>
         {items.length === 0 ? (
@@ -119,7 +111,7 @@ class Cart extends React.Component {
             Seu carrinho está vazio
           </h2>
         ) : (
-          items.map((item) => this.verifica(item))
+          itemsFiltrados.map((item) => this.verifica(item))
         )}
         {total}
         <Link to="/checkout" data-testid="checkout-products">
