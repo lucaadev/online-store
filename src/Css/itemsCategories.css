@@ -1,0 +1,40 @@
+@keyframes bounce {
+
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-20px);
+  }
+
+  80% {
+    transform: translateY(-10px);
+  }
+}
+
+.items-categories-buttons {
+  background-color: #99a0d1;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  height: 25px;
+  justify-content: center;
+  margin: 10px;
+  position: relative;
+  transition: all 500ms ease;
+  white-space: normal;
+  width: 200px;
+}
+
+.items-categories-buttons:hover {
+  animation: bounce 1s;
+}
+
+.div-categoties-buttons {
+  display: flexbox;
+  justify-content: flex-start;
+  margin: 30px;
+}

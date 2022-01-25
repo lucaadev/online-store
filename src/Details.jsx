@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import './Css/sectionDetails.css';
 import { Link } from 'react-router-dom';
 
 class Details extends React.Component {
@@ -48,115 +49,123 @@ class Details extends React.Component {
     }
     console.log(frete);
     return (
-      <section>
-        <h2 data-testid="product-detail-name">{produto.title}</h2>
-        <img alt="imagem" src={ produto.thumbnail } />
-        <h2>{produto.price}</h2>
-        {typeof produto.shipping === 'object' && <h2>{frete.toString()}</h2>}
-        <button
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => addCartItem(produto) }
-          type="button"
-        >
-          Adicionar ao Carrinho
-        </button>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          Carrinho
-        </Link>
-        <h2 data-testid="shopping-cart-size">{items !== undefined && FOUR}</h2>
-        <form>
-          <input
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-            data-testid="product-detail-email"
-            type="email"
-          />
-          <label htmlFor="1">
-            1
+      <div className="div-details">
+        <section className="section-details">
+          <h2 data-testid="product-detail-name">{produto.title}</h2>
+          <img className="image-details" alt="imagem" src={ produto.thumbnail } />
+          <div className="price-and-cart">
+            <h2>{produto.price}</h2>
+            {typeof produto.shipping === 'object'
+            && <h2 style={ { display: 'none' } }>{frete.toString()}</h2>}
+            <button
+              className="add-cart-details"
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => addCartItem(produto) }
+              type="button"
+            >
+              Adicionar ao Carrinho
+            </button>
+            <div className="cart-and-quantie">
+              <h2 data-testid="shopping-cart-size">{items !== undefined && FOUR}</h2>
+              <Link to="/cart" data-testid="shopping-cart-button">
+                Carrinho vrummmm
+              </Link>
+            </div>
+          </div>
+          <form className="form-detail">
             <input
-              id="1"
-              name="radio"
-              checked={ radio === '1' }
-              value={ radio }
-              onClick={ this.handleChange }
-              data-testid="1-rating"
-              type="radio"
+              name="email"
+              value={ email }
+              onChange={ this.handleChange }
+              data-testid="product-detail-email"
+              type="email"
             />
-          </label>
-          <label htmlFor="2">
-            2
-            <input
-              id="2"
-              name="radio"
-              checked={ radio === '2' }
-              value={ radio }
-              onClick={ this.handleChange }
-              data-testid="2-rating"
-              type="radio"
+            <label htmlFor="1">
+              1
+              <input
+                id="1"
+                name="radio"
+                checked={ radio === '1' }
+                value={ radio }
+                onClick={ this.handleChange }
+                data-testid="1-rating"
+                type="radio"
+              />
+            </label>
+            <label htmlFor="2">
+              2
+              <input
+                id="2"
+                name="radio"
+                checked={ radio === '2' }
+                value={ radio }
+                onClick={ this.handleChange }
+                data-testid="2-rating"
+                type="radio"
+              />
+            </label>
+            <label htmlFor="3">
+              3
+              <input
+                id="3"
+                name="radio"
+                checked={ radio === '3' }
+                value={ radio }
+                onClick={ this.handleChange }
+                data-testid="3-rating"
+                type="radio"
+              />
+            </label>
+            <label htmlFor="4">
+              4
+              <input
+                id="4"
+                name="radio"
+                checked={ radio === '4' }
+                value={ radio }
+                onClick={ this.handleChange }
+                data-testid="4-rating"
+                type="radio"
+              />
+            </label>
+            <label htmlFor="5">
+              5
+              <input
+                id="5"
+                name="radio"
+                checked={ radio === '5' }
+                value={ radio }
+                onClick={ this.handleChange }
+                data-testid="5-rating"
+                type="radio"
+              />
+            </label>
+            <textarea
+              name="area"
+              value={ area }
+              onChange={ this.handleChange }
+              data-testid="product-detail-evaluation"
+              type="text"
             />
-          </label>
-          <label htmlFor="3">
-            3
-            <input
-              id="3"
-              name="radio"
-              checked={ radio === '3' }
-              value={ radio }
-              onClick={ this.handleChange }
-              data-testid="3-rating"
-              type="radio"
-            />
-          </label>
-          <label htmlFor="4">
-            4
-            <input
-              id="4"
-              name="radio"
-              checked={ radio === '4' }
-              value={ radio }
-              onClick={ this.handleChange }
-              data-testid="4-rating"
-              type="radio"
-            />
-          </label>
-          <label htmlFor="5">
-            5
-            <input
-              id="5"
-              name="radio"
-              checked={ radio === '5' }
-              value={ radio }
-              onClick={ this.handleChange }
-              data-testid="5-rating"
-              type="radio"
-            />
-          </label>
-          <textarea
-            name="area"
-            value={ area }
-            onChange={ this.handleChange }
-            data-testid="product-detail-evaluation"
-            type="text"
-          />
-          <button
-            type="submit"
-            onClick={ () => this.save() }
-            data-testid="submit-review-btn"
-          >
-            Submeter
-          </button>
-        </form>
-        <h2>{localStorage.getItem('email')}</h2>
-        {' '}
-        <br />
-        <h2>{localStorage.getItem('radio')}</h2>
-        {' '}
-        <br />
-        <h2>{localStorage.getItem('area')}</h2>
-        {' '}
-        <br />
-      </section>
+            <button
+              type="submit"
+              onClick={ () => this.save() }
+              data-testid="submit-review-btn"
+            >
+              Submeter
+            </button>
+          </form>
+          <h2>{localStorage.getItem('email')}</h2>
+          {' '}
+          <br />
+          <h2>{localStorage.getItem('radio')}</h2>
+          {' '}
+          <br />
+          <h2>{localStorage.getItem('area')}</h2>
+          {' '}
+          <br />
+        </section>
+      </div>
     );
   }
 }

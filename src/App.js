@@ -1,5 +1,10 @@
 import React from 'react';
-import './App.css';
+import './Css/homepage.css';
+import './Css/itemsCategories.css';
+import './Css/lupa.css';
+import './Css/searchBar.css';
+import './Css/searchButton.css';
+import './Css/titleHomepage.css';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import ProductsList from './ProductsList';
