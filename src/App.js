@@ -25,11 +25,6 @@ class App extends React.Component {
     this.setState((prevState) => ({
       cartItems: [...prevState.cartItems, product],
     }));
-    // fetch(`https://api.mercadolibre.com/items/${productId}`)
-    // .then((response) => response.json())
-    // .then((data) => this.setState((prevState) => ({
-    // cartItems: [...prevState.cartItems, data],
-    // })));
   };
 
   render() {
