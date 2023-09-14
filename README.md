@@ -1,4 +1,3 @@
-# :construction: README em construção ! :construction:
 # Front End Online Store
 
 Este é um projeto de uma loja online desenvolvida em grupo, onde criamos uma versão simplificada, sem persistência no banco de dados, com funcionalidades baseadas em demandas definidas em um quadro Kanban. O objetivo é proporcionar uma experiência mais próxima do mercado de trabalho. A aplicação foi construída utilizando ReactJS e JavaScript.
@@ -62,12 +61,7 @@ Este projeto foi desenvolvido como parte de um curso de treinamento, mas você �
 
 ## Autores
 
-- [Nome do Autor 1](https://github.com/autor1)
-- [Nome do Autor 2](https://github.com/autor2)
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
+- [Lucas Cavalcante](https://github.com/lucaadev)
 
 ---
 
